@@ -1,0 +1,22 @@
+{
+  "name": "steam-read-winreg",
+  "version": "0.0.1",
+  "description": "Simple read-only api to get info about local steam installation from windows registry",
+  "main": "index.js",
+  "author": "xander27",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn compile && node ./lib/index.js",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "yarn compile"
+  },
+  "dependencies": {
+    "winreg": "^1.2.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
