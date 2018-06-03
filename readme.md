@@ -1,5 +1,5 @@
 #  steam-winreg
-Simple helper functions to get information about local steam installation from windows registry
+Simple js helper functions to get information about local steam installation from windows registry
 
 ## Installation
 ```bash
