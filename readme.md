@@ -71,5 +71,5 @@ Output:
 }
 ```
 
-#License
+# License
 MIT
