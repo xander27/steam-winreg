@@ -1,6 +1,6 @@
 {
   "name": "steam-winreg",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple read-only api to get info about local steam installation from windows registry",
   "main": "lib/index.js",
   "author": "Alexander Borovkov",
