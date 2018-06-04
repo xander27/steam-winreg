@@ -71,5 +71,17 @@ export const getSettings = () => getRegistryItems(Registry.HKCU, '\\Software\\Va
  */
 export const getApps = () => getRegistryKeys(Registry.HKCU, '\\Software\\Valve\\Steam\\Apps')
     .then(keys => keys.filter(k => !!k).map(k => k.substr(4)))
-    .then(keys => Promise.all(keys.map(key => getRegistryItems(Registry.HKCU, key))))
-    .then(data => data.map(parseApp).filter(a => !!a));
+    .then(keys => Promise.all(keys.map(key => getRegistryItems(Registry.HKCU, key).then(data => ({data, key})))))
+    .then(items => {
+        let result = {};
+        for(let {key, data} of items){
+            let app = parseApp(data);
+            if(!app){
+                continue;
+            }
+            let parts = key.split('\\');
+            let id = parts[parts.length - 1];
+            result[id] = app;
+        }
+        return result;
+    });

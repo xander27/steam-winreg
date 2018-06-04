@@ -20,13 +20,11 @@ main().then();
 
 Output:
 ```javascript
-[ { name: 'Language', value: 'russian' },
-  { name: 'SteamExe', value: 'd:/steam/steam.exe' },
+[ { name: 'SteamExe', value: 'd:/steam/steam.exe' },
   { name: 'SteamPath', value: 'd:/steam' },
   { name: 'SuppressAutoRun', value: false },
   { name: 'Restart', value: false },
   { name: 'BigPictureInForeground', value: false },
-  { name: 'AutoLoginUser', value: 'xander27b' },
   { name: 'RememberPassword', value: true },
   { name: 'SourceModInstallPath',
     value: 'D:\\steam\\steamapps\\sourcemods' },
@@ -54,24 +52,23 @@ main().then();
 Output:
 
 ```javascript
-[ { Installed: false,
-    Updating: false,
-    Launching: false,
-    Running: false,
-    Name: 'Project Zomboid' },
-  { Installed: false,
-    Updating: false,
-    Name: 'L.A. Noire',
-    Running: false },
-  { Installed: false,
-    Updating: false,
-    Name: 'Pox Nora',
-    Running: false },
-  { Installed: true,
-    Updating: false,
-    Name: 'Wolfenstein: The New Order',
-    Running: false }
-]
+{ '2820': 
+   { Installed: false,
+     Updating: false,
+     Name: 'X3: Terran Conflict',
+     Running: false },
+  '8500': 
+   { Installed: true,
+     Updating: false,
+     Launching: false,
+     Running: false,
+     Name: 'EVE Online' },
+  '24980': 
+   { Installed: false,
+     Updating: false,
+     Running: false,
+     Name: 'Mass Effect 2' }
+}
 ```
 
 #License
