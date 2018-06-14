@@ -86,13 +86,13 @@ main().then();
 Output:
 
 ```javascript
-{ pid: 0,
+{ pid: 7777777,
   SteamClientDll: 'D:\\steam\\steamclient.dll',
   SteamClientDll64: 'D:\\steam\\steamclient64.dll',
   Universe: 'Public',
   ActiveUser: 0 }
 ```
-or
+or if there is no active process
 ```javascript
 null
 ``` 
