@@ -1,4 +1,5 @@
 import Registry from 'winreg'
+import fromPairs from 'lodash.frompairs'
 
 const BOOLEAN_FIELDS = new Set([
     'SuppressAutoRun',
@@ -14,31 +15,28 @@ const BOOLEAN_FIELDS = new Set([
     'Running',
 ]);
 
-function parseRegistryItem(item){
+function parseRegistryItem(item) {
     let value = item.value;
-    if(BOOLEAN_FIELDS.has(item.name)) {
-         value = item.value.endsWith('1');
-    } else if (value.startsWith('0x')){
+    if (BOOLEAN_FIELDS.has(item.name)) {
+        value = item.value.endsWith('1');
+    } else if (value.startsWith('0x')) {
         value = parseInt(value, 16);
     }
-    return {
-        name: item.name,
-        value
-    };
+    return [item.name, value];
 }
 
-function parseApp(app){
+function parseApp(app) {
     let result = {};
-    for(let {name, value} of app){
+    for (let {name, value} of app) {
         result[name] = value;
     }
-    if(!result['Name']){
+    if (!result['Name']) {
         return null;
     }
     return result;
 }
 
-function parseRegistryKey(key){
+function parseRegistryKey(key) {
     return key.path;
 }
 
@@ -48,7 +46,7 @@ function getRegistryItems(hive, key) {
         if (err) {
             return reject(err);
         }
-        return resolve(items.map(parseRegistryItem));
+        return resolve(fromPairs(items.map(parseRegistryItem)));
     })));
 }
 
@@ -74,9 +72,9 @@ export const getApps = () => getRegistryKeys(Registry.HKCU, '\\Software\\Valve\\
     .then(keys => Promise.all(keys.map(key => getRegistryItems(Registry.HKCU, key).then(data => ({data, key})))))
     .then(items => {
         let result = {};
-        for(let {key, data} of items){
+        for (let {key, data} of items) {
             let app = parseApp(data);
-            if(!app){
+            if (!app) {
                 continue;
             }
             let parts = key.split('\\');
@@ -85,3 +83,17 @@ export const getApps = () => getRegistryKeys(Registry.HKCU, '\\Software\\Valve\\
         }
         return result;
     });
+
+/**
+ * Get active process info or {@code null} if no steam process running
+ */
+export const getActiveProcess = () => getRegistryItems(Registry.HKCU, '\\Software\\Valve\\Steam\\ActiveProcess')
+    .then(data => {
+        if (data['ActiveUser'] === 0) {
+            return null;
+        }
+        return data;
+    });
+
+
+getActiveProcess().then(console.log);

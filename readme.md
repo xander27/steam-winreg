@@ -20,20 +20,20 @@ main().then();
 
 Output:
 ```javascript
-[ { name: 'SteamExe', value: 'd:/steam/steam.exe' },
-  { name: 'SteamPath', value: 'd:/steam' },
-  { name: 'SuppressAutoRun', value: false },
-  { name: 'Restart', value: false },
-  { name: 'BigPictureInForeground', value: false },
-  { name: 'RememberPassword', value: true },
-  { name: 'SourceModInstallPath',
-    value: 'D:\\steam\\steamapps\\sourcemods' },
-  { name: 'Rate', value: '30000' },
-  { name: 'AlreadyRetriedOfflineMode', value: false },
-  { name: 'WebHelperFirewall', value: 2 },
-  { name: 'DWriteEnable', value: true },
-  { name: 'StartupMode', value: false },
-  { name: 'RunningAppID', value: 0 } ]
+{ Language: 'russian',
+  SteamExe: 'd:/steam/steam.exe',
+  SteamPath: 'd:/steam',
+  SuppressAutoRun: false,
+  Restart: false,
+  BigPictureInForeground: false,
+  RememberPassword: true,
+  SourceModInstallPath: 'D:\\steam\\steamapps\\sourcemods',
+  Rate: '30000',
+  AlreadyRetriedOfflineMode: false,
+  WebHelperFirewall: 2,
+  DWriteEnable: true,
+  StartupMode: false,
+  RunningAppID: 0 }
 ```
 
 ### Get info about apps
@@ -70,6 +70,32 @@ Output:
      Name: 'Mass Effect 2' }
 }
 ```
+
+### Get info about active process
+
+```javascript
+import {getSettings} from 'steam-winreg'
+
+async function main(){
+    console.log(await getActiveProcess());
+}
+
+main().then();
+```
+
+Output:
+
+```javascript
+{ pid: 0,
+  SteamClientDll: 'D:\\steam\\steamclient.dll',
+  SteamClientDll64: 'D:\\steam\\steamclient64.dll',
+  Universe: 'Public',
+  ActiveUser: 0 }
+```
+or
+```javascript
+null
+``` 
 
 # License
 MIT
