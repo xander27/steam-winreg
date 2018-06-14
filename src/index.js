@@ -94,6 +94,3 @@ export const getActiveProcess = () => getRegistryItems(Registry.HKCU, '\\Softwar
         }
         return data;
     });
-
-
-getActiveProcess().then(console.log);
